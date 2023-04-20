@@ -5,7 +5,9 @@ import static org.junit.jupiter.api.Assertions.assertNull;
 import static org.junit.jupiter.api.Assertions.assertTrue;
 
 import org.junit.jupiter.api.Test;
+import org.springframework.boot.test.context.SpringBootTest;
 
+@SpringBootTest
 public class divisaoTeste {
     private Divisao divisao = new Divisao();
 
@@ -45,4 +47,14 @@ public class divisaoTeste {
             double result = divisao.executar(0, -10);
             assertTrue(result==0);
         }
+        @Test
+        void testFinalDepois() {
+            double result = divisao.executar(2, 2);
+            assertTrue(result==1);
+        }    
+        @Test
+        void testFinalDepoisMESMO() {
+            Double result = divisao.executar(0, 0);
+            assertTrue(result==null);
+        }  
 }

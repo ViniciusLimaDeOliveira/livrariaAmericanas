@@ -3,7 +3,8 @@ package br.com.americanas.atividade.livraria.atividade_aula;
 import static org.junit.jupiter.api.Assertions.assertEquals;
 
 import org.junit.jupiter.api.Test;
-
+import org.springframework.boot.test.context.SpringBootTest;
+@SpringBootTest
 public class potencialTeste {
     private Potenciacao potencia = new Potenciacao();
     //- Potenciação simples, exemplo: 5^3 = 125

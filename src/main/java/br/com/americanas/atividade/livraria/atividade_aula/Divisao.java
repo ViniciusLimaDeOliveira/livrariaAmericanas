@@ -8,7 +8,7 @@ package br.com.americanas.atividade.livraria.atividade_aula;
 public class Divisao {
     
 
-    Double executar(int number1,int number2){
+    public Double executar(int number1,int number2){
         if(number1==number2 && number1!=0){
             return 1.0;
         }else if(number1>number2){
