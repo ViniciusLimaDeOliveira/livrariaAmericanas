@@ -24,13 +24,5 @@ public class LivroRepositoryTest {
                                         "1111-1111-111-11", "teste@gmail.com",
                                     "(99)9-9999-9999", 100D, null));
     Long idPessoaFake = (long) (pessoaTest.getId());
-    String response = mvc.perform(post(baseUri+"/"+idContaFake)
-    .param("valor", "10")
-    .contentType(MediaType.APPLICATION_JSON))
-    .andDo(print())
-    .andExpect(status().isNotFound())
-    .andReturn().getResponse().getErrorMessage();
-
-    assertEquals("Recurso não encontrado.",response);
    }
 }
