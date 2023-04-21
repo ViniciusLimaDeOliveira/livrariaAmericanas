@@ -5,5 +5,5 @@ import org.springframework.boot.test.context.SpringBootTest;
 
 @SpringBootTest
 class LivroControllerTest {
-    
+    private final String baseUri = "/livroes";
 }

@@ -2,7 +2,7 @@ package br.com.americanas.atividade.livraria.controller;
 
 import java.util.List;
 
-
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
@@ -20,8 +20,12 @@ import lombok.RequiredArgsConstructor;
 @RequestMapping("/transacao")
 @RequiredArgsConstructor
 public class TransacaoController {
+   
+    @Autowired
     private final TransacaoRepository repository;
+    @Autowired
     private final TransacaoService service;
+    
     @GetMapping("{id}")
     public Transacao getTransacao(@PathVariable Long id) {
         return repository.findById(id).orElseThrow(ResourceNotFoundException::new);

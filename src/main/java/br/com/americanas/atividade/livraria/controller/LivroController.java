@@ -1,6 +1,8 @@
 package br.com.americanas.atividade.livraria.controller;
 
 import java.util.List;
+
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
@@ -18,7 +20,7 @@ import lombok.RequiredArgsConstructor;
 @RequestMapping("/livros")
 @RequiredArgsConstructor
 public class LivroController {
-    
+    @Autowired
     private LivroRepository repository;
     @GetMapping("{id}")
     public Livro getLivro(@PathVariable Long id) {

@@ -23,12 +23,10 @@ import lombok.NoArgsConstructor;
 @Entity
 public class Pessoa implements Serializable{
     @Id
-    @SequenceGenerator(name = "pessoaSequenceGenerator", sequenceName = "PESSOA_SQ", initialValue = 100)
-    @GeneratedValue(generator = "pessoaSequenceGenerator", strategy = GenerationType.SEQUENCE)
-    @Column(updatable = false)
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
-    private String name;
+    private String nome;
 
     private String cpf;
     
