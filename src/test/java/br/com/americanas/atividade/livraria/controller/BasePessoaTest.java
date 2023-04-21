@@ -33,7 +33,7 @@ abstract class BasePessoaTest {
         return pessoaBase;
     }
 
-    protected Pessoa obtemContaDoBanco(Pessoa pessoaBase) {
+    protected Pessoa obtemPessoaDoBanco(Pessoa pessoaBase) {
         return repository.findById(pessoaBase.getId())
                 .orElseThrow(NullPointerException::new);
     }
