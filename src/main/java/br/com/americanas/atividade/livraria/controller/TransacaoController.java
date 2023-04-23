@@ -17,7 +17,7 @@ import br.com.americanas.atividade.livraria.service.TransacaoService;
 import lombok.RequiredArgsConstructor;
 
 @RestController
-@RequestMapping("/transacao")
+@RequestMapping("/transacaos")
 @RequiredArgsConstructor
 public class TransacaoController {
    

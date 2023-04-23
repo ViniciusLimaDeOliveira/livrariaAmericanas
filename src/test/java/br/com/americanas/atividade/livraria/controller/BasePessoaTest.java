@@ -26,11 +26,13 @@ abstract class BasePessoaTest {
     @Autowired
     protected PessoaRepository repository;
 
-    protected Pessoa criarPessoa(Long id,String name,String cpf,String email,String telefone,Double saldo,List<Transacao> transacoes) {
-        Pessoa pessoaBase = repository.save(new Pessoa( id, name,cpf, email,telefone, saldo, transacoes));
-        pessoaBase = repository.save(pessoaBase);
+    protected Pessoa criarPessoa(Long id,String name,String cpf,String email,String telefone,Double saldo) {
+        Pessoa pessoaBase = repository.save(new Pessoa(id,name,cpf, email,telefone, saldo));
         assertEquals(saldo, pessoaBase.getSaldo());
         return pessoaBase;
+    }
+    protected void deletarPessoa(Pessoa pessoa){
+       repository.delete(pessoa);
     }
 
     protected Pessoa obtemPessoaDoBanco(Pessoa pessoaBase) {

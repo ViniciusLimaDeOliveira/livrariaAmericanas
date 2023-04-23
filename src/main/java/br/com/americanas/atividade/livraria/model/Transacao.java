@@ -5,6 +5,7 @@ import java.util.List;
 import jakarta.persistence.JoinColumn;
 import jakarta.persistence.CascadeType;
 import jakarta.persistence.Entity;
+import jakarta.persistence.FetchType;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
@@ -25,10 +26,11 @@ public class Transacao implements Serializable {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
-    @ManyToOne
+    // @ManyToOne(fetch = FetchType.EAGER)
+    // @JoinColumn(name = "pessoa_id")
     private Pessoa pessoa;
 
-    @ManyToMany(cascade = CascadeType.DETACH)
+    @ManyToMany(cascade = CascadeType.ALL,fetch = FetchType.EAGER)
     @JoinTable(
         name = "transacao_livro",
         joinColumns = { @JoinColumn(name = "transacao_id") },

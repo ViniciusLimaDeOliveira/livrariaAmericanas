@@ -4,12 +4,16 @@ import static org.junit.jupiter.api.Assertions.assertEquals;
 
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.boot.test.autoconfigure.web.servlet.AutoConfigureMockMvc;
+import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.test.web.servlet.MockMvc;
 
 import br.com.americanas.atividade.livraria.model.Livro;
 import br.com.americanas.atividade.livraria.repository.LivroRepository;
 
-public class BaselivroTest {
+@SpringBootTest
+@AutoConfigureMockMvc
+abstract class BaselivroTest {
     
     @Autowired
     protected MockMvc mvc;
@@ -17,11 +21,9 @@ public class BaselivroTest {
     @Autowired
     protected LivroRepository repository;
 
-    protected Livro criarConta(Long id,String nome,String edicao,String autor,Double preco,Long quantidade) {
+    protected Livro criarLivro(Long id,String nome,String edicao,String autor,Double preco,Long quantidade) {
         Livro livroBase = repository.save(new Livro(id, nome, edicao, autor, preco, quantidade));
-        livroBase = repository.save(livroBase);
-        Livro livroTeste = repository.getReferenceById(id);
-        assertEquals(livroBase,livroTeste,"OK");
+        assertEquals(preco,livroBase.getPreco(),"OK");
         return livroBase;
     }
 
@@ -29,5 +31,7 @@ public class BaselivroTest {
         return repository.findById(livroBase.getId())
                 .orElseThrow(NullPointerException::new);
     }
-
+    protected void deletarLivro(Livro livroBase) {
+        repository.delete(livroBase);
+    }
 }
