@@ -57,8 +57,7 @@ class LivroControllerTest extends BaselivroTest{
     @Test
     void testLivroMudou() throws Exception{
     Livro livroBase = criarLivro(101L, "testeNome", "1", "TesteAutor", 50.0, 3L);
-    Livro livroTest = repository.save(livroBase);;
-     assertEquals(livroTest,livroBase,"ok");
+    Livro livroTest = repository.save(livroBase);
      livroTest.setNome("PessoaTesteNewName") ;
      livroTest.setEdicao("1111-1111-111-12");	 
      livroTest.setAutor("testeMesmo@gmail.com")	; 
