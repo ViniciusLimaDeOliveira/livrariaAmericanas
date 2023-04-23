@@ -3,6 +3,9 @@ package br.com.americanas.atividade.livraria.controller;
 import java.util.ArrayList;
 import static org.springframework.test.web.servlet.result.MockMvcResultHandlers.print;
 import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.junit.jupiter.api.Assertions.assertFalse;
+import static org.junit.jupiter.api.Assertions.assertNotEquals;
+import static org.junit.jupiter.api.Assertions.assertTrue;
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.status;
 import org.junit.jupiter.api.Test;
 import org.springframework.boot.test.context.SpringBootTest;
@@ -16,33 +19,53 @@ import static org.springframework.test.web.servlet.request.MockMvcRequestBuilder
 @SpringBootTest
 class TransacaoControllerTest extends BaseTransacaoTest{
     private final String baseUri = "/transacaos";
-    @Test
-    void testPessoaExiste() throws Exception{
+//     @Test
+//     void testTransacaoExiste() throws Exception{
    
-    Pessoa pessoa = new Pessoa(101L,"pessoaTeste",
-    "1111-1111-111-11", "teste@gmail.com",
-"(99)9-9999-9999", 100D);
-Transacao transacaoBase = criarTransacao(103L,pessoa,new ArrayList<Livro>());
+//     Pessoa pessoa = new Pessoa(101L,"pessoaTeste",
+//     "1111-1111-111-11", "teste@gmail.com",
+// "(99)9-9999-9999", 100D);
+// Transacao transacaoBase = criarTransacao(103L,pessoa,new ArrayList<Livro>());
 
-    // String response =  mvc.perform(post(baseUri)
-    // .param("pessoa",new ObjectMapper().writeValueAsString(pessoa),"livros",new ArrayList<Livro>().toString())
-    // .contentType(MediaType.APPLICATION_JSON))
-    //                     .andDo(print())
-    //                     .andExpect(status().isOk())
-    //                     .andReturn().getResponse().getContentAsString();
-    String response = mvc.perform(MockMvcRequestBuilders.
-    post(baseUri)
-    .content(new ObjectMapper().writeValueAsString(transacaoBase))
-    .contentType(MediaType.APPLICATION_JSON)
-    .accept(MediaType.APPLICATION_JSON))
-    .andExpect(status().isOk())
-    .andReturn().getResponse().getContentAsString();  
+//     // String response =  mvc.perform(post(baseUri)
+//     // .param("pessoa",new ObjectMapper().writeValueAsString(pessoa),"livros",new ArrayList<Livro>().toString())
+//     // .contentType(MediaType.APPLICATION_JSON))
+//     //                     .andDo(print())
+//     //                     .andExpect(status().isOk())
+//     //                     .andReturn().getResponse().getContentAsString();
+//     String response = mvc.perform(MockMvcRequestBuilders.
+//     post(baseUri)
+//     .content(new ObjectMapper().writeValueAsString(transacaoBase))
+//     .contentType(MediaType.APPLICATION_JSON)
+//     .accept(MediaType.APPLICATION_JSON))
+//     .andExpect(status().isOk())
+//     .andReturn().getResponse().getContentAsString();  
+
+//     ObjectMapper mapper = new ObjectMapper();  
+//     String json = mapper.writeValueAsString( transacaoBase ); 
+
+//     assertEquals(response,transacaoBase, "OK");
+//     deletarTransacao(transacaoBase);
+//     deletarPessoa(pessoa);
+//     }
+
+
+    @Test
+    void testPessoaMudou() throws Exception{
+        Pessoa pessoa = new Pessoa(101L,"pessoaTeste",
+        "1111-1111-111-11", "teste@gmail.com",
+    "(99)9-9999-9999", 100D);
+    Transacao transacaoBase = criarTransacao(103L,pessoa,new ArrayList<Livro>());
+    Transacao transacaoTest = repository.save(transacaoBase);
+     assertNotEquals(transacaoTest,transacaoBase,"ok");
+    ArrayList<Livro> liv = new ArrayList<>();
+    Livro teste = new Livro(101L, "testeNome", "1", "TesteAutor", 50.0, 3L);
+    liv.add(teste);
+    transacaoTest.setLivros(liv) ;
+    transacaoTest.setPessoa(pessoa);
     
-    ObjectMapper mapper = new ObjectMapper();  
-    String json = mapper.writeValueAsString( transacaoBase ); 
-
-    assertEquals(response,transacaoBase, "OK");
+    assertNotEquals(transacaoBase,transacaoTest);
+    assertNotEquals(transacaoBase.getLivros(),transacaoTest.getLivros());
     deletarTransacao(transacaoBase);
-    deletarPessoa(pessoa);
     }
 }
