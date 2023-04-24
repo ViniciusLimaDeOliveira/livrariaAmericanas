@@ -51,7 +51,7 @@ class TransacaoControllerTest extends BaseTransacaoTest{
 
 
     @Test
-    void testPessoaMudou() throws Exception{
+    void testTransacaoMudou() throws Exception{
         Pessoa pessoa = new Pessoa(101L,"pessoaTeste",
         "1111-1111-111-11", "teste@gmail.com",
     "(99)9-9999-9999", 100D);
